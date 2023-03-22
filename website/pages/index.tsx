@@ -12,9 +12,9 @@ export default () => {
   return (
     <div>
       <Head>
-        <title>JONAS | Full Stack Developer</title>
-        <meta name="description" content="I’m a front-end web developer specializing in building (and occasionally designing) exceptional digital experiences." />
-        <link rel="icon" href="/fav.png" />
+        <title>Jonas Grønbek</title>
+        <meta name="description" content="Building maintainable and robust software applications, with an eye for patterns and architectural design." />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div id='home' className='w-full h-screen text-center'>
       <div className='max-w-[1240px] w-full h-full mx-auto flex justify-center items-center'>

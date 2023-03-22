@@ -3,39 +3,32 @@ import Link from 'next/link';
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
-export default () => {
-  const [nav, setNav] = useState(false);
-  const [shadow, setShadow] = useState(false);
-  const [navBg, setNavBg] = useState('#ecf0f3');
-  const [linkColor, setLinkColor] = useState('#1f2937');
+const LINK_COLOR = '#1f2937'
 
-  const handleNav = () => {
-    setNav(!nav);
+export default () => {
+  const [showMobileNav, setShowMovibileNav] = useState(true);
+  const [showShadow, setShowShadow] = useState(false);
+
+  const toggleMobileNav = () => {
+    setShowMovibileNav(!showMobileNav);
   };
 
   useEffect(() => {
-    const handleShadow = () => {
-      if (window.scrollY >= 90) {
-        setShadow(true);
-      } else {
-        setShadow(false);
-      }
-    };
-    window.addEventListener('scroll', handleShadow);
+    window.addEventListener('scroll', () => setShowShadow(window.scrollY >= 90));
   }, []);
 
   return (
     <div
-      style={{ backgroundColor: `${navBg}` }}
+      style={{ backgroundColor: '#ecf0f3' }}
       className={
-        shadow
+        showShadow
           ? 'fixed w-full h-20 shadow-xl z-[100] ease-in-out duration-200'
           : 'fixed w-full h-20 z-[100]'
       }
     >
       <div className='flex justify-center items-center w-full h-full px-2 2xl:px-16'>
         <div>
-          <ul style={{ color: `${linkColor}` }} className='hidden md:flex'>
+          <ul style={{ color: LINK_COLOR }} className='hidden md:flex'>
             <li className='ml-10 text-sm uppercase hover:border-b'>
               <Link href='/'>Home</Link>
             </li>
@@ -50,8 +43,8 @@ export default () => {
             </li>
           </ul>
           <div
-            style={{ color: `${linkColor}` }}
-            onClick={handleNav}
+            style={{ color: LINK_COLOR }}
+            onClick={toggleMobileNav}
             className='md:hidden'
           >
             <AiOutlineMenu size={25} />
@@ -61,12 +54,12 @@ export default () => {
 
       <div
         className={
-          nav ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/70' : ''
+          showMobileNav ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/70' : ''
         }
       >
         <div
           className={
-            nav
+            showMobileNav
               ? ' fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#ecf0f3] p-10 ease-in duration-500'
               : 'fixed left-[-100%] top-0 p-10 ease-in duration-500'
           }
@@ -74,7 +67,7 @@ export default () => {
           <div>
             <div className='flex w-full items-center justify-between'>
               <div
-                onClick={handleNav}
+                onClick={toggleMobileNav}
                 className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'
               >
                 <AiOutlineClose />
@@ -89,22 +82,22 @@ export default () => {
           <div className='py-4 flex flex-col'>
             <ul className='uppercase'>
               <Link href='/'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                <li onClick={() => setShowMovibileNav(false)} className='py-4 text-sm'>
                   Home
                 </li>
               </Link>
               <Link href='/about'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                <li onClick={() => setShowMovibileNav(false)} className='py-4 text-sm'>
                   About
                 </li>
               </Link>
               <Link href='/skills'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                <li onClick={() => setShowMovibileNav(false)} className='py-4 text-sm'>
                   Skills
                 </li>
               </Link>
               <Link href='/contact'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                <li onClick={() => setShowMovibileNav(false)} className='py-4 text-sm'>
                   Contact
                 </li>
               </Link>
@@ -134,7 +127,7 @@ export default () => {
                 </a>
                 <Link href='/#contact'>
                   <div
-                    onClick={() => setNav(!nav)}
+                    onClick={toggleMobileNav}
                     className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'
                   >
                     <AiOutlineMail />

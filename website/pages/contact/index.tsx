@@ -10,12 +10,13 @@ import MeImg from '../../public/assets/me.png';
 export default  () => {
   return (
     <div id='contact' className='w-full lg:h-screen'>
-      <div className='max-w-[1240px] m-auto px-2 py-16 w-full '>
+      <div className='max-w-[1240px] m-auto px-2 pt-20 w-full '>
         <p className='text-xl tracking-widest uppercase text-[#5651e5]'>
           Contact
         </p>
         <h2 className='py-4'>Get In Touch</h2>
         <div className='grid lg:grid-cols-5 gap-8'>
+          
           {/* left */}
           <div className='col-span-3 lg:col-span-2 w-full h-full shadow-xl shadow-gray-400 rounded-xl p-4'>
             <div className='lg:p-4 h-full '>
@@ -28,16 +29,16 @@ export default  () => {
               </div>
               <div>
                 <h2 className='py-2'>Jonas Grønbek</h2>
-                <p>Full Stack Developer</p>
+                <p>Software Developer</p>
                 <p className='py-4'>
                   Feel free to either connect with me or contact me for business inquiries
                 </p>
               </div>
               <div>
-                <p className='uppercase pt-8'>Connect With Me</p>
-                <div className='flex items-center justify-between py-4'>
+                <p className='pt-8'>Connect with me on:</p>
+                <div className='flex items-center justify-around py-4'>
                   <a
-                    href='https://www.linkedin.com/in/clint-briley-50056920a/'
+                    href='https://www.linkedin.com/in/jonas-groenbek/'
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -46,7 +47,7 @@ export default  () => {
                     </div>
                   </a>
                   <a
-                    href='https://github.com/fireclint'
+                    href='https://github.com/jonasgroenbek'
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -55,9 +56,6 @@ export default  () => {
                     </div>
                   </a>
 
-                  <div className='rounded-full shadow-lg shadow-gray-400 p-6 cursfor-pointer hover:scale-110 ease-in duration-300'>
-                    <AiOutlineMail />
-                  </div>
                 </div>
               </div>
             </div>
@@ -122,7 +120,7 @@ export default  () => {
             </div>
           </div>
         </div>
-        <div className='flex justify-center py-12'>
+        <div className='flex justify-center py-6'>
           <Link href='/'>
               <div className='rounded-full shadow-lg shadow-gray-400 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
                 <HiOutlineChevronDoubleUp

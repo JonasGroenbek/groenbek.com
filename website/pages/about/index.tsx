@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import MeImg from '../../public/assets/me.png';
+import DevImg from '../../public/assets/dev.jpeg';
 
 export default () => {
   return (
-    <div id='about' className='w-full md:h-screen flex items-center py-16'>
+    <div id='about' className='w-full md:h-screen flex items-center pb-16'>
       <div className='max-w-[1240px] m-auto md:grid grid-cols-3 gap-8'>
         <div className='col-span-2'>
           <p className='uppercase text-xl tracking-widest text-[#5651e5]'>
@@ -12,10 +12,10 @@ export default () => {
           </p>
           <h2 className='py-4'>Who I Am</h2>
           <p className='py-2 text-gray-600'>
-          Living in Denmark and commuting to my back then Swedish high school, I spent around 2500 hours commuting. 
-          While doing so, I often watched my classmate build an android application while on the train. 
-          He would often try to explain concepts to me, or I would come up with ideas for the app. 
-          After multiple failed attempts to build one myself, I chose to study Computer Science and, later, Software Development.
+          I have always been fascinated by computers. I had a long commute in high school since I had to travel cross country from Denmark to Sweden.
+          While doing so, I often watched my classmate build an android application while on the train.
+          He would often try to explain concepts to me, or I would develop ideas for the app.
+          After multiple failed attempts to build one, I chose to study Computer Science and, later, Software Development.
           </p>
           <p className='py-2 text-gray-600'>
 
@@ -29,7 +29,7 @@ export default () => {
           </p>
         </div>
         <div className='w-full h-auto m-auto shadow-xl shadow-gray-400 rounded-xl flex items-center justify-center p-4 hover:scale-105 ease-in duration-300'>
-          <Image src={MeImg} className='rounded-xl' alt='A picture of myself  ' />
+          <Image src={DevImg} className='rounded-xl' alt='A picture of myself  ' />
         </div>
       </div>
     </div>
