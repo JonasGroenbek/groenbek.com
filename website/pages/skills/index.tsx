@@ -1,4 +1,3 @@
-import React from "react";
 import ReactImg from "../../public/assets/react.png";
 import GithubImg from "../../public/assets/github.png";
 import NestjsImg from "../../public/assets/nestjs.png";

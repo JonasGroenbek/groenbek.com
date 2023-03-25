@@ -1,4 +1,3 @@
-import React from "react";
 import Image, { StaticImageData } from "next/image";
 
 const SIZE_PX = 70;

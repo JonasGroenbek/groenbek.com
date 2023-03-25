@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from "react-icons/ai";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
@@ -14,9 +14,11 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", () =>
-      setShowShadow(window.scrollY >= 90)
-    );
+    const onScroll = () => {
+      setShowShadow(window.scrollY >= 90);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
