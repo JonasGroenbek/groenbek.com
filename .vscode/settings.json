@@ -1,0 +1,12 @@
+{
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "eslint.validate": ["typescript", "javascript"],
+    "editor.formatOnSave": true,
+    "[typescript, javascript, javascriptreact, typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
+  
