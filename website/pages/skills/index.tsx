@@ -21,10 +21,11 @@ export default function Skills() {
         </p>
         <p className="py-2 text-gray-600">
           I gravitate towards the intricacies of software development,
-          especially when it comes to applying architectural designs and
-          patterns. I have worked with many technologies; some usually make a
-          more significant impression than others. Below is a list of some I am
-          proficient with and would use for a future project.
+          especially when it comes to applying managing infrastructure or
+          applying architectural designs and patterns. I have worked with many
+          technologies; some usually make a more significant impression than
+          others. Below is a list of some I am proficient with and would use for
+          a future project.
         </p>
         <h2 className="py-4">Technologies</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
