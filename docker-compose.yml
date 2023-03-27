@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    env_file:
+      - ./server/.env
+    ports:
+      - '3001:3001'
+    networks:
+      - app
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_module
+    restart: unless-stopped
+    command: >
+      sh -c "npm run start"
+  website:
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+    env_file:
+      - ./website/.env
+    ports:
+      - '3000:3000'
+    networks:
+      - app
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_module
+    restart: unless-stopped
+    command: >
+      sh -c "npm run start"
+
+networks:
+  app:
+    driver: bridge
