@@ -2,13 +2,9 @@ resource "aws_ecs_cluster" "main" {
   name = "groenbek-ecs-cluster"
 }
 
-data "aws_iam_role" "ecs_task_execution_role" {
-  name = "ecsTaskExecutionRole"
-}
-
 resource "aws_ecs_task_definition" "main" {
   family             = "groenbek-ecs-task-definition"
-  execution_role_arn = data.aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn = aws_iam_role.ecsTaskExecutionRole.arn
   container_definitions = jsonencode([
     {
       name  = "groenbek-ecs-task-definition"
@@ -35,14 +31,14 @@ resource "aws_ecs_service" "main" {
   desired_count   = 1
 
   network_configuration {
-    subnets          = [aws_subnet.private.*.id[0]]
+    subnets          = [aws_subnet.public.*.id[0]]
     security_groups  = [aws_security_group.ecs.id]
     assign_public_ip = false
   }
 
   load_balancer {
     target_group_arn = aws_lb_target_group.main.arn
-    container_name   = "groenbek"
+    container_name   = "groenbek-ecs-task-definition"
     container_port   = 3000
   }
 }

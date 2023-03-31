@@ -1,18 +1,53 @@
 resource "aws_lb" "main" {
-  name               = "groenbek-lb"
+  name = "groenbek-lb"
+  subnets = [
+    aws_subnet.public.id,
+    aws_subnet.private.id,
+  ]
+  internal           = false
   load_balancer_type = "application"
-  subnets            = aws_subnet.public.*.id
   security_groups    = [aws_security_group.lb.id]
 }
 
 resource "aws_lb_target_group" "main" {
-  name     = "groenbek-lb-target-group"
-  port     = 3000
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.main.id
+  name        = "groenbek-lb-target-group"
+  port        = 3000
+  target_type = "ip"
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.main.id
+
+  depends_on = [
+    aws_lb.main,
+  ]
 }
 
 resource "aws_security_group" "lb" {
   name_prefix = "groenbek-lb"
   vpc_id      = aws_vpc.main.id
+}
+
+resource "aws_lb_listener" "main" {
+  load_balancer_arn = aws_lb.main.arn
+  port              = 80
+  protocol          = "HTTP"
+  default_action {
+    target_group_arn = aws_lb_target_group.main.arn
+    type             = "forward"
+  }
+}
+
+resource "aws_lb_listener_rule" "main" {
+  listener_arn = aws_lb_listener.main.arn
+  priority     = 100
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.main.arn
+  }
+
+  condition {
+    path_pattern {
+      values = ["/"]
+    }
+  }
 }
