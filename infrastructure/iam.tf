@@ -14,7 +14,60 @@ resource "aws_iam_role" "ecsTaskExecutionRole" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy_attachment" {
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+resource "aws_iam_policy" "ecrPullPolicy" {
+  name = "ecrPullPolicy"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:GetRepositoryPolicy",
+          "ecr:DescribeRepositories",
+          "ecr:ListImages",
+          "ecr:DescribeImages",
+          "ecr:BatchGetImage"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_policy" "taskExecutionPolicy" {
+  name = "taskExecutionPolicy"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "arn:aws:logs:*:*:*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "ssm:GetParameter",
+          "ssm:GetParameters"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_ecr" {
+  policy_arn = aws_iam_policy.ecrPullPolicy.arn
+  role       = aws_iam_role.ecsTaskExecutionRole.name
+}
+
+resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_task_execution" {
+  policy_arn = aws_iam_policy.taskExecutionPolicy.arn
   role       = aws_iam_role.ecsTaskExecutionRole.name
 }

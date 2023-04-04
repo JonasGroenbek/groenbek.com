@@ -1,5 +1,5 @@
 resource "aws_lb" "main" {
-  name = "groenbek-lb"
+  name = "groenbek"
   subnets = [
     aws_subnet.public.id,
     aws_subnet.private.id,
@@ -10,7 +10,7 @@ resource "aws_lb" "main" {
 }
 
 resource "aws_lb_target_group" "main" {
-  name        = "groenbek-lb-target-group"
+  name        = "groenbek"
   port        = 3000
   target_type = "ip"
   protocol    = "HTTP"
@@ -22,7 +22,7 @@ resource "aws_lb_target_group" "main" {
 }
 
 resource "aws_security_group" "lb" {
-  name_prefix = "groenbek-lb"
+  name_prefix = "groenbek"
   vpc_id      = aws_vpc.main.id
 }
 

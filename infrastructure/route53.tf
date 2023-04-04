@@ -1,10 +1,10 @@
 resource "aws_route53_zone" "main" {
-  name = "groenbek.com"
+  name = var.domain_name
 }
 
 resource "aws_route53_record" "main" {
   zone_id = aws_route53_zone.main.zone_id
-  name    = "groenbek.com"
+  name    = var.domain_name
   type    = "A"
 
   /*
