@@ -33,9 +33,8 @@ resource "aws_ecs_service" "main" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = [aws_subnet.public.*.id[0]]
-    security_groups  = [aws_security_group.ecs.id]
-    assign_public_ip = false
+    security_groups = [aws_security_group.ecs.id]
+    subnets         = [aws_subnet.private.id]
   }
 
   load_balancer {
@@ -48,12 +47,4 @@ resource "aws_ecs_service" "main" {
 resource "aws_security_group" "ecs" {
   name_prefix = "groenbek-ecs"
   vpc_id      = aws_vpc.main.id
-
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
 }
