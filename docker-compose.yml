@@ -8,12 +8,12 @@ services:
     env_file:
       - ./server/.env
     ports:
-      - '3001:3001'
+      - '3100:3100'
     networks:
       - app
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_module
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
     restart: unless-stopped
     command: >
       sh -c "npm run start"
@@ -21,18 +21,18 @@ services:
     build:
       context: ./website
       dockerfile: Dockerfile
-    env_file:
-      - ./website/.env
+    environment:
+      - NODE_ENV=development
     ports:
       - '3000:3000'
     networks:
       - app
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_module
+      - ./website:/usr/src/app
+      - /usr/src/app/node_modules
     restart: unless-stopped
     command: >
-      sh -c "npm run start"
+      sh -c "npm run dev"
 
 networks:
   app:
