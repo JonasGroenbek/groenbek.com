@@ -1,9 +1,18 @@
 Personal website using terraform
 
-in order to run the website you first need to push it to ECR
+To authenciate to ECR
 
-docker build -t groenbek_website:latest .
+```
+aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <aws-account-id>.dkr.ecr.<region>.amazonaws.com
+```
 
-docker tag {your docker image tag} {aws account id}.dkr.ecr.{aws region}.amazonaws.com/{ecr repository}:{your docker image tag}
+To build and push to ECR
 
-docker push {your docker image tag} {aws account id}.dkr.ecr.{aws region}.amazonaws.com/{ecr repository}:{your docker image tag}
+```
+docker build -t <image-name>:latest .
+
+docker tag <image-name> <aws-account-id>.dkr.ecr.<region>.amazonaws.com/<repository-name>:<tag>
+
+docker push <aws-account-id>.dkr.ecr.<region>.amazonaws.com/<repository-name>:<tag>
+
+```
